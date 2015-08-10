@@ -1,0 +1,54 @@
+---
+title: "Generate data for networking"
+author: "Junji Shimagaki"
+date: "08/10/2015"
+output: html_document
+---
+
+```{r}
+source(file="dffunc.R")  # Functions to manipulate DF
+
+path.change   <- "../Data/oss-gerrit/2015-0717-1354-46-changes.csv"
+path.patchset <- "../Data/oss-gerrit/2015-0717-1354-46-patchsets.csv"
+path.review   <- "../Data/oss-gerrit/2015-0717-1354-46-reviews.csv"
+
+#
+CHANGE <- CHANGE.read(path.change)
+MAP.num.proj <- CHANGE[, c("project", "number")]
+
+#
+REVIEW.raw <- read.csv(path.review)
+REVIEW.raw$id <- paste(REVIEW.raw$number, REVIEW.raw$date)
+REVIEW <- REVIEW.read(REVIEW.raw, MAP.num.proj, reviewers=c("Gerrit Code Review"))
+REVIEW$id <- paste(REVIEW$number, REVIEW$date)
+REVIEW <- merge(subset(REVIEW.raw, select=c(id, message)), REVIEW, by="id", all=FALSE)
+
+#
+PATCHSET.raw <- read.csv(path.patchset)
+auto <- c("nobody")
+PATCHSET.all <- PATCHSET.read(PATCHSET.raw, REVIEW.raw, committers=auto)
+PATCHSET.all <- INDEX.proj(PATCHSET.all, MAP.num.proj)
+PATCHSET.latest <- FLTR.latest(PATCHSET.all)
+
+preproc <- CHANGE.summary.REVIEW(CHANGE,
+                                 GERRIT.add.ID(PATCHSET.all),
+                                 GERRIT.add.ID(REVIEW))
+# Output 1: A row is a commit
+write.csv(file="id-proj-owner-approver-verifier.csv",
+          row.names=FALSE,
+          x = subset(preproc, select=c(number, project, owner, approver, verifier)))
+write.csv(file="id-proj-owner-approver-verifier_raw.csv",
+          row.names=FALSE,
+          x = preproc)
+
+# Output 2: A row is a review
+preproc2 <- REVIEW
+preproc2 <- merge(preproc2, subset(CHANGE, select=c(number, owner)), by="number")
+
+write.csv(file="id-proj-owner-reviwer-rscore-vscore.csv",
+          row.names=FALSE,
+          x = subset(preproc2, select=c(number, project, owner, reviewer, date, rscore, vscore)))
+write.csv(file="id-proj-owner-reviwer_raw.csv",
+          row.names=FALSE,
+          x = subset(preproc2, select=c(number, project, owner, reviewer, date, message)))
+```
