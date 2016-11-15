@@ -65,6 +65,7 @@ For example::
      u'sysfs_path': u'/sys/devices/pci0000:00/0000:00:14.0/usb3/3-7',
      u'pretty': None, u'serial': u'CB5A26YQV5', u'type': u'handset'}
     >>> # You can update your .ave/config/handset.json to define pretty.
+    >>> # You have to restart ave-broker by `ave-broker --restart` to reload the config file.
 
 .. rublic:: Remote handset control
 
