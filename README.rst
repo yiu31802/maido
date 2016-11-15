@@ -53,14 +53,14 @@ Make sure that ``ave-broker`` is running in your system checked by
 do whatever available in the
 `API document <https://sonyxperiadev.github.io/ave/handset/docs/android_api.html>`_.
 For example::
-`@johanaspegren <https://github.com/johanaspegren>`
+
     >>> import ave.broker as b
     >>> B = b.Broker()
     >>> handset = B.get_resource({"type": "handset"})
     >>> handset.ls(".")[0:3]
     [u'acct', u'bt_firmware', u'cache']
     >>> handset.profile
-    {u'workstation': u'jptolx22168.corpusers.net', u'power_state': u'boot_completed',
+    {u'workstation': u'machine.s', u'power_state': u'boot_completed',
      u'product.model': u'so-03h', u'platform': u'android',
      u'sysfs_path': u'/sys/devices/pci0000:00/0000:00:14.0/usb3/3-7',
      u'pretty': None, u'serial': u'CB5A26YQV5', u'type': u'handset'}
@@ -87,7 +87,7 @@ Then you can use the handset from a remote machine::
     >>> B = b.Broker()
     >>> handset = B.get_resource({"type": "handset"}) # Handset is available
     >>> handset.profile
-    {u'workstation': u'jptolx22168.corpusers.net', u'power_state': u'boot_completed',
+    {u'workstation': u',machine.s', u'power_state': u'boot_completed',
 
 Acknowledgement
 ---------------
