@@ -51,9 +51,9 @@ Sample
 Make sure that ``ave-broker`` is running in your system checked by
 ``ps aux | grep ave-broker``. Then you can try to allocate a device and
 do whatever available in the
-`API document <https://sonyxperiadev.github.io/ave/handset/docs/android_api.html>`.
+`API document <https://sonyxperiadev.github.io/ave/handset/docs/android_api.html>`_.
 For example::
-
+`@johanaspegren <https://github.com/johanaspegren>`
     >>> import ave.broker as b
     >>> B = b.Broker()
     >>> handset = B.get_resource({"type": "handset"})
