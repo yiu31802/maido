@@ -52,7 +52,7 @@ Make sure that `ave-broker` is running in your system checked by
 `ps aux | grep ave-broker`. Then you can try to allocate a device and
 do whatever available in the
 `API document <https://sonyxperiadev.github.io/ave/handset/docs/android_api.html>`.
-For example,
+For example::
 
     >>> import ave.broker as b
     >>> B = b.Broker()
@@ -72,9 +72,9 @@ One of the major features AVE has is to control handsets over network via
 RPC proxy. You can configure your server and client machines as in the
 diagram below:
 
-.. image:: https://raw.githubusercontent.com/sonyxperiadev/yiu31802/maido/obj/device_sharing.png
+.. image:: https://github.com/yiu31802/maido/blob/master/obj/device_sharing.png?raw=true
 
-Then you can use handset from a remote machine:
+Then you can use handset from a remote machine::
 
     ssh machine.c
     adb devices # Shows nothing of course
