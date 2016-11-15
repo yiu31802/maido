@@ -48,7 +48,7 @@ Sample
 
 .. rublic:: Basic handset control
 
-Make sure that `ave-broker` is running in your system checked by
+Make sure that ``ave-broker`` is running in your system checked by
 `ps aux | grep ave-broker`. Then you can try to allocate a device and
 do whatever available in the
 `API document <https://sonyxperiadev.github.io/ave/handset/docs/android_api.html>`.
@@ -73,12 +73,17 @@ RPC proxy. You can configure your server and client machines as in the
 diagram below:
 
 .. image:: https://github.com/yiu31802/maido/blob/master/obj/device_sharing.png?raw=true
+    :width: 100%
+    :align: center
 
-Then you can use handset from a remote machine::
+Note that those config files are located under ``$HOME/.ave/config``.
+Then you can use the handset from a remote machine::
 
     ssh machine.c
     adb devices # Shows nothing of course
+    ave-broker --list # But this shows a device name
     python
+    >>> import ave.broker as b
     >>> B = b.Broker()
     >>> handset = B.get_resource({"type": "handset"}) # Handset is available
     >>> handset.profile
