@@ -78,8 +78,8 @@ diagram below:
     :align: center
 
 Note that those config files are located under ``$HOME/.ave/config``.
-*Again, please restart ``ave-broker`` by ``ave-broker --restart`` on both
-of the machines who are communicating.*
+**Again, please restart ``ave-broker`` by ``ave-broker --restart`` on both
+of the machines who are communicating.**
 Then you can use the handset from a remote machine::
 
     ssh machine.c
